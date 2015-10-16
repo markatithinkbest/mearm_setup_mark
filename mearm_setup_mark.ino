@@ -4,10 +4,8 @@
  *
  */
 
-
-#include <SoftwareSerial.h>
 #include <Servo.h>
-Servo myservo;
+
 Servo servo1;
 Servo servo2;
 Servo servo3;
@@ -16,58 +14,18 @@ Servo servo4;
 int STD_DELAY=13; //連續動作時的delay, 4很快,12很有機器人的慢節奏
 int LONG_DELAY=60;//每一小動的delay,60 ok
 
-
 int value=0;
 
-//3,5,6,9,10,11 ---Arduino Senser Sheld 5.0
+// Arduino Senser Sheld 5.0
 int m1Pin=3;
 int m2Pin=5;
 int m3Pin=6;
 int m4Pin=9;
 
-void motorAct(int t,int m, int n){
-  if (m<n){
-    for (int i=m;i<=n;i++){
-      switch (t){
-        case 1:
-          servo1.write(i*1);
-          break;
-        case 2:
-          servo2.write(i*1);
-          break;
-        case 3:
-          servo3.write(i*1);
-          break;
-        case 4:
-          servo4.write(i*1);
-          break;
-      }
-      delay(STD_DELAY);
-    }
-  }
-  
-  if (m>n){
-    for (int i=m;i>=n;i--){
-      switch (t){
-        case 1:
-          servo1.write(i*1);
-          break;
-        case 2:
-          servo2.write(i*1);
-          break;
-        case 3:
-          servo3.write(i*1);
-          break;
-       case 4:
-          servo4.write(i*1);
-          break;
-      }
-      delay(STD_DELAY);
-    }
-  } 
-  delay(LONG_DELAY);
-}
-
+// 給定的伺服馬達,從 m 運動到 n
+// 這兩個值的區間是 0 到180
+// 但受到手臂結構限制,不能全部運動
+// 因此要一個一個調試
 void servoAct(Servo servo,int m, int n){
   if (m<n){
     for (int i=m;i<=n;i++){
@@ -85,6 +43,7 @@ void servoAct(Servo servo,int m, int n){
   delay(LONG_DELAY);
 }
 
+// 這是組合的範例
 void combo1(){
   servoAct(servo4,90,150);//底盤起始位置90度,轉到150度的位置
   
