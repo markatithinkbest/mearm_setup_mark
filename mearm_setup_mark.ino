@@ -35,8 +35,7 @@ void servoAct(Servo servo,int m, int n){
   }  
   if (m>n){
     for (int i=m;i>=n;i--){
-    servo.write(i*1);
-      delay(STD_DELAY);
+      servo.write(i*1);
       delay(STD_DELAY);
     }
   } 
